@@ -1,0 +1,20 @@
+<div class="chat-member" [routerLink]="['/chat', member.id]">
+
+  <div class="member-info">
+    <div class="avatar">
+      <img [src]="member.imageUrl" alt="img">
+    </div>
+
+    <div class="wrap">
+      <div class="name-and-message-prev">
+        <span class="name">{{member.name}}</span>
+        <br>
+        <span class="message-prev">Hello boi</span>
+      </div>
+      <span class="date"></span>
+    </div>
+
+
+  </div>
+
+</div>

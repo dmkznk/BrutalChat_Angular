@@ -1,0 +1,44 @@
+.chat-member {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid #e8e8e8;
+
+  .member-info {
+    align-items: center;
+    width: 100%;
+    display: flex;
+
+    .avatar {
+      height: 60px;
+      width: 60px;
+      min-width: 60px;
+      border-radius: 50px;
+      margin-right: 20px;
+      overflow: hidden;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .wrap {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      .name {
+        font-size: 1.2rem;
+      }
+
+      .message-prev {
+        color: gray;
+      }
+    }
+  }
+}
+
+
+
