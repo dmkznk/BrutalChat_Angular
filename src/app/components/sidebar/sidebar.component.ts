@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {MembersService} from "../../shared/services/members.service";
+import {Member} from "../../shared/interfaces/member";
+
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  public members: Member[];
+
+  constructor(private membersService: MembersService) { }
 
   ngOnInit(): void {
+    this.members = this.membersService.getMembers();
   }
 
 }

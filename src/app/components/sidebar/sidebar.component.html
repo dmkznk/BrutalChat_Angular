@@ -1,1 +1,23 @@
-<p>sidebar works!</p>
+<div class="sidebar">
+
+  <div class="sidebar-header">
+    <div class="avatar">
+      <img src="https://kingsballpen.com.ng/wp-content/uploads/2019/12/img-avatar-blank.jpg" alt="img">
+    </div>
+    <div class=search>
+      <input placeholder='Search or start new chat'/>
+      <i class='fas fa-search'></i>
+    </div>
+  </div>
+
+  <div class="sidebar-title">
+    <h2>Chats</h2>
+  </div>
+
+  <div class="chat-members">
+    <app-chat-member *ngFor="let member of members"
+                    [member]="member">
+    </app-chat-member>
+  </div>
+
+</div>
