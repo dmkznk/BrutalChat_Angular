@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from '@angular/router';
+import {MembersService} from '../../shared/services/members.service';
+import {Member} from '../../shared/interfaces/member';
 
 @Component({
   selector: 'app-chat',
@@ -8,19 +10,17 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ChatComponent implements OnInit {
 
+  member: Member;
+
   constructor(
-    private rote: ActivatedRoute
-    // service
+    private rote: ActivatedRoute,
+    private membersService: MembersService
   ) { }
 
   ngOnInit(): void {
-
     // diff method, private
     this.rote.params.subscribe(params => {
-      console.log(+params.id)
-    })
+      this.member = this.membersService.getMemberById(+params.id);
+    });
   }
-
-  // get member by id...
-
 }

@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MembersService} from "../../shared/services/members.service";
-import {Member} from "../../shared/interfaces/member";
-
+import {MembersService} from '../../shared/services/members.service';
+import {Member} from '../../shared/interfaces/member';
 
 @Component({
   selector: 'app-sidebar',

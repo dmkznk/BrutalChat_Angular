@@ -1,4 +1,4 @@
-<div class="chat-member" [routerLink]="['/chat', member.id]">
+<div class="chat-member" (click)="navigate()">
 
   <div class="member-info">
     <div class="avatar">
@@ -9,9 +9,11 @@
       <div class="name-and-message-prev">
         <span class="name">{{member.name}}</span>
         <br>
-        <span class="message-prev">Hello boi</span>
+           <span class="message-prev">
+              {{cutMessage(member.history[member.history.length-1].message)}}
+          </span>
       </div>
-      <span class="date"></span>
+      <span class="date">{{member.history[member.history.length-1].messageTime.date}}</span>
     </div>
 
   </div>

@@ -6,20 +6,18 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatMemberComponent } from './components/sidebar/chat-member/chat-member.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
     ChatComponent,
-    ChatMemberComponent
+    ChatMemberComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]

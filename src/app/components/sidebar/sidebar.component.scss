@@ -47,14 +47,11 @@
         &:focus {
           outline: none;
         }
-        &:focus + i {
-          opacity: .5;
-        }
       }
     }
 }
   .sidebar-title {
-    padding: 30px;
+    padding: 30px 20px;
     color: deepskyblue;
 
     h2 {

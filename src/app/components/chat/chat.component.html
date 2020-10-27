@@ -1,3 +1,29 @@
 <div class="chat">
-  <h1>chat</h1>
+
+  <div class="chat-header">
+    <div class="avatar">
+      <img [src]="member.imageUrl" alt="img">
+    </div>
+    <div class="name">{{member.name}}</div>
+  </div>
+
+  <div class="chat-massages">
+    <div class="all-messages"
+         *ngFor="let allMessages of member.history"
+         [ngClass]="{messageFromMe: allMessages.isMessageFromMe}"
+    >
+      <div class="avatar" *ngIf="!allMessages.isMessageFromMe">
+        <img [src]="member.imageUrl" alt="img">
+      </div>
+      <p class="text">{{allMessages.message}}</p>
+    </div>
+  </div>
+
+  <div class="chat-footer">
+    <div class="send-message">
+      <input type="text" placeholder="Type your message">
+      <i class="fas fa-paper-plane"></i>
+    </div>
+  </div>
+
 </div>
