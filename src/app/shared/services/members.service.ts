@@ -16,7 +16,7 @@ export class MembersService {
       sortTime: 111,
       history: [
         {
-          message: 'message1',
+          message: 'Yak se mash my friend? Very',
           isMessageFromMe: true,
           messageTime: {
             date: 'Oct 23, 2020',
@@ -184,7 +184,7 @@ export class MembersService {
     {
       id: 5,
       name: 'Jackie Chan',
-      isOnline: true,
+      isOnline: false,
       isRead: true,
       imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Jackie_Chan_by_Gage_Skidmore.jpg/1200px-Jackie_Chan_by_Gage_Skidmore.jpg',
       sortTime: 111,
