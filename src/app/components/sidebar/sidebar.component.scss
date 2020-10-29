@@ -12,14 +12,22 @@
     .avatar {
       height: 60px;
       width: 60px;
-      border-radius: 50px;
       margin-bottom: 30px;
-      overflow: hidden;
+      position: relative;
 
       img {
         height: 100%;
         width: 100%;
+        border-radius: 50px;
         object-fit: cover;
+      }
+
+      i {
+        color: limegreen;
+        z-index: 44;
+        position: absolute;
+        bottom: 0;
+        right: 0;
       }
     }
 

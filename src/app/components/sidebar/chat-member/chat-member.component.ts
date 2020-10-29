@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Member} from '../../../shared/interfaces/member';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-chat-member',
@@ -11,17 +10,13 @@ export class ChatMemberComponent implements OnInit {
 
   @Input() member: Member;
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {  }
 
   public cutMessage(message: string): string {
-    return message.length > 60
-      ? message.slice(0, 60) + '...'
+    return message.length > 50
+      ? message.slice(0, 50) + '...'
       : message;
-  }
-
-  public navigate(): void {
-    this.router.navigate(['/chat', this.member.id]).then();
   }
 }

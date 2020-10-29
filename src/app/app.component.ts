@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'chat-test';
+
+  // constructor => inject services
+  // onInit => 1 service = 2 service
 }

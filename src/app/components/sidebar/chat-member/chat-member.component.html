@@ -1,8 +1,13 @@
-<div class="chat-member" (click)="navigate()">
+<div class="chat-member" >
 
   <div class="member-info">
     <div class="avatar">
-      <img [src]="member.imageUrl" alt="img">
+      <img *ngIf="member.imageUrl else noAvatar"
+        [src]="member.imageUrl" alt="img">
+      <ng-template #noAvatar>
+        <img src="https://kingsballpen.com.ng/wp-content/uploads/2019/12/img-avatar-blank.jpg" alt="img">
+      </ng-template>
+      <i *ngIf="member.isOnline" class="far fa-check-circle"></i>
     </div>
 
     <div class="wrap">
@@ -13,9 +18,16 @@
               {{cutMessage(member.history[member.history.length-1].message)}}
           </span>
       </div>
-      <span class="date">{{member.history[member.history.length-1].messageTime.date}}</span>
+      <div class="date-and-notification">
+        <span class="date">{{member.history[member.history.length-1].messageTime.date | date}}</span>
+        <span class="notification"
+              *ngIf="!member.history[member.history.length-1].isRead"
+        ><i class="fas fa-comment-dots"></i>
+        </span>
+      </div>
     </div>
 
   </div>
-
+  <a class="navigate" [routerLink]="['/chat', member.id]" routerLinkActive="hello"></a>
 </div>
+

@@ -2,28 +2,49 @@
 
   <div class="chat-header">
     <div class="avatar">
-      <img [src]="member.imageUrl" alt="img">
+      <img *ngIf="member.imageUrl else noAvatar"
+           [src]="member.imageUrl" alt="img">
+      <ng-template #noAvatar>
+        <img src="https://kingsballpen.com.ng/wp-content/uploads/2019/12/img-avatar-blank.jpg" alt="img">
+      </ng-template>
+      <i *ngIf="member.isOnline" class="far fa-check-circle"></i>
     </div>
     <div class="name">{{member.name}}</div>
   </div>
 
-  <div class="chat-massages">
+  <div #scrollContainer class="chat-massages">
     <div class="all-messages"
          *ngFor="let allMessages of member.history"
          [ngClass]="{messageFromMe: allMessages.isMessageFromMe}"
     >
+
       <div class="avatar" *ngIf="!allMessages.isMessageFromMe">
-        <img [src]="member.imageUrl" alt="img">
+        <img *ngIf="member.imageUrl else noAvatar"
+             [src]="member.imageUrl" alt="img">
+        <ng-template #noAvatar>
+          <img src="https://kingsballpen.com.ng/wp-content/uploads/2019/12/img-avatar-blank.jpg" alt="img">
+        </ng-template>
       </div>
-      <p class="text">{{allMessages.message}}</p>
+
+      <div class="wrap">
+        <p class="text">{{allMessages.message}}</p>
+        <span class="date-and-time">
+          {{allMessages.messageTime.date | date: 'M/d/yy, h:mm a'}}
+        </span>
+      </div>
+
     </div>
   </div>
 
   <div class="chat-footer">
     <div class="send-message">
-      <input type="text" placeholder="Type your message">
-      <i class="fas fa-paper-plane"></i>
+      <input  type="text"
+              placeholder="Type your message"
+              [(ngModel)]="newMessageText"
+              (keydown.enter)="sendMessage()"
+      >
+      <i class="fas fa-paper-plane"
+         (click)="sendMessage()"></i>
     </div>
   </div>
-
 </div>
