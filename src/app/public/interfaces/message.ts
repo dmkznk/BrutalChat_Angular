@@ -1,5 +1,5 @@
-export interface History {
-  message: string;
+export interface Message {
+  text: string;
   isMessageFromMe: boolean;
   isRead: boolean;
   messageTime: {

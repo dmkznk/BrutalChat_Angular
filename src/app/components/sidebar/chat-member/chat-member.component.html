@@ -1,5 +1,4 @@
-<div class="chat-member" >
-
+<div class="chat-member" (click)="openMessage()">
   <div class="member-info">
     <div class="avatar">
       <img *ngIf="member.imageUrl else noAvatar"
@@ -15,19 +14,21 @@
         <span class="name">{{member.name}}</span>
         <br>
            <span class="message-prev">
-              {{cutMessage(member.history[member.history.length-1].message)}}
+              {{cutMessage(member.history[member.history.length-1].text)}}
           </span>
       </div>
       <div class="date-and-notification">
-        <span class="date">{{member.history[member.history.length-1].messageTime.date | date}}</span>
+        <span class="date">
+          {{member.history[member.history.length-1].messageTime.date | date}}
+        </span>
         <span class="notification"
-              *ngIf="!member.history[member.history.length-1].isRead"
-        ><i class="fas fa-comment-dots"></i>
+              *ngIf="!member.history[member.history.length-1].isRead">
+          <i class="fas fa-comment-dots"></i>
         </span>
       </div>
     </div>
 
   </div>
-  <a class="navigate" [routerLink]="['/chat', member.id]" routerLinkActive="hello"></a>
+  <a class="navigate" [routerLink]="['/chat', member.id]" routerLinkActive="active"></a>
 </div>
 

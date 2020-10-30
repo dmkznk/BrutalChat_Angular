@@ -1,5 +1,4 @@
 <div class="sidebar">
-
   <div class="sidebar-header">
     <div class="avatar">
       <img src="https://kingsballpen.com.ng/wp-content/uploads/2019/12/img-avatar-blank.jpg" alt="img">
@@ -7,7 +6,7 @@
 
     </div>
     <div class=search>
-      <input placeholder='Search or start new chat'/>
+      <input placeholder='Search or start new chat' [(ngModel)]="searchInput"/>
       <i class='fas fa-search'></i>
     </div>
   </div>
@@ -17,9 +16,9 @@
   </div>
 
   <div class="chat-members">
-    <app-chat-member *ngFor="let member of members"
-                    [member]="member">
+    <app-chat-member *ngFor="let member of members | search:searchInput"
+                     [searchInput]="searchInput"
+                     [member]="member">
     </app-chat-member>
   </div>
-
 </div>

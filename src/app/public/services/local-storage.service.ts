@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {chatData} from '../chatData/chat-data';
+import {chatData} from '../chat-data/chat-data';
 import {environment} from '../../../environments/environment';
 import {Member} from '../interfaces/member';
 
@@ -9,8 +9,6 @@ import {Member} from '../interfaces/member';
 export class LocalStorageService {
 
   private members: Array<Member> = chatData;
-
-  constructor() { }
 
   public setToLS(): void {
     localStorage.setItem(environment.localStorageKey, JSON.stringify(this.members));

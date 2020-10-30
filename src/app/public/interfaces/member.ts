@@ -1,10 +1,9 @@
-import {History} from './history';
+import {Message} from './message';
 
 export interface Member {
   id: number;
   name: string;
   isOnline: boolean;
   imageUrl: string;
-  sortTime: number;
-  history: Array<History>;
+  history: Array<Message>;
 }

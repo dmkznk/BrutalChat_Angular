@@ -1,10 +1,11 @@
 import {AfterViewChecked, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {MembersService} from '../../shared/services/members.service';
-import {Member} from '../../shared/interfaces/member';
-import {HttpService} from '../../shared/services/http.service';
+import {Member} from '../../public/interfaces/member';
+import {Message} from "../../public/interfaces/message";
+import {MembersService} from '../../public/services/members.service';
+import {JokesApiService} from '../../public/services/jokes-api.service';
+import {LocalStorageService} from '../../public/services/local-storage.service';
 import {delay} from 'rxjs/operators';
-import {LocalStorageService} from '../../shared/services/local-storage.service';
 
 @Component({
   selector: 'app-chat',
@@ -14,48 +15,37 @@ import {LocalStorageService} from '../../shared/services/local-storage.service';
 export class ChatComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrollContainer') private scrollContainer: ElementRef;
 
-  member: Member;
-  newMessageText  = '';
-  currentMemberId: number;
+  public member: Member;
+  public newMessageText = '';
 
   constructor(
     private rote: ActivatedRoute,
     private membersService: MembersService,
-    private httpService: HttpService,
-    private localStorageService: LocalStorageService
+    private httpService: JokesApiService,
+    private localStorageService: LocalStorageService,
   ) { }
 
   ngOnInit(): void {
-    this.rote.params.subscribe(params => {
-      this.member = this.membersService.getMemberById(+params.id);
-      this.scrollToBottom();
-
-      if (this.member.id === this.currentMemberId) {
-        this.member.history[this.member.history.length - 1].isRead = true;
-        this.localStorageService.setToLS();
-      }
-    });
+    this.getMember();
   }
-
 
   ngAfterViewChecked(): void {
     this.scrollToBottom();
   }
 
-  private scrollToBottom(): void {
-    try {
-      this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
-    } catch (err) { }
+  private getMember(): void {
+    this.rote.params.subscribe(params => {
+      this.member = this.membersService.getMemberById(+params.id);
+    });
   }
-
 
   public sendMessage(): void {
     if (!this.newMessageText.trim()) {
       return;
     }
 
-    const newMyMessage = {
-      message: this.newMessageText,
+    const newMyMessage: Message = {
+      text: this.newMessageText,
       isMessageFromMe: true,
       isRead: true,
       messageTime: {
@@ -70,28 +60,30 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     const currentMemberId: number = this.member.id;
     this.getMessage(currentMemberId);
     this.scrollToBottom();
-
   }
 
-  private getMessage(currentMemberId: number): void {
+  private getMessage(id: number): void {
   this.httpService.getMessage()
     .pipe(delay(3000))
-    .subscribe(res => {
-      const newInterlocutorMessage = {
-        message: res.value,
+    .subscribe(jokesApiRes => {
+
+      const newInterlocutorMessage: Message = {
+        text: jokesApiRes.value,
         isMessageFromMe: false,
-        isRead: this.member.id === currentMemberId,
+        isRead: this.member.id === id,
         messageTime: {
           date: new Date(),
         }};
 
-      const currentMember = this.membersService.getMemberById(currentMemberId);
+      const currentMember = this.membersService.getMemberById(id);
       currentMember.history.push(newInterlocutorMessage);
-
-      this.currentMemberId = currentMemberId;
 
       this.localStorageService.setToLS();
     });
+  }
+
+  private scrollToBottom(): void {
+    this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
   }
 }
 
