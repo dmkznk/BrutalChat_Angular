@@ -3,10 +3,10 @@
     <div class="avatar">
       <img src="https://kingsballpen.com.ng/wp-content/uploads/2019/12/img-avatar-blank.jpg" alt="img">
       <i class="far fa-check-circle"></i>
-
     </div>
+
     <div class=search>
-      <input placeholder='Search or start new chat' [(ngModel)]="searchInput"/>
+      <input placeholder='Search' [(ngModel)]="searchInputValue"/>
       <i class='fas fa-search'></i>
     </div>
   </div>
@@ -16,8 +16,8 @@
   </div>
 
   <div class="chat-members">
-    <app-chat-member *ngFor="let member of members | search:searchInput"
-                     [searchInput]="searchInput"
+    <app-chat-member *ngFor="let member of members | SortByTime | SearchByName:searchInputValue"
+                     [searchInputValue]="searchInputValue"
                      [member]="member">
     </app-chat-member>
   </div>

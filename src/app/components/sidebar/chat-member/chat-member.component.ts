@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
-import {Member} from '../../../public/interfaces/member';
+import {MemberInterface} from '../../../public/interfaces/member.interface';
 import {LocalStorageService} from '../../../public/services/local-storage.service';
+import {MessageInterface} from '../../../public/interfaces/message.interface';
 
 @Component({
   selector: 'app-chat-member',
@@ -9,21 +10,27 @@ import {LocalStorageService} from '../../../public/services/local-storage.servic
 })
 export class ChatMemberComponent {
 
-  @Input() member: Member;
-  @Input() searchInput: string;
+  @Input() public member: MemberInterface;
+  @Input() public searchInputValue: string;
 
-  constructor(private localStorageService: LocalStorageService) { }
+  constructor(
+    private localStorageService: LocalStorageService,
+    ) { }
 
   public cutMessage(message: string): string {
-    return message.length > 50
-      ? message.slice(0, 50) + '...'
-      : message;
+    if (message) {
+      return message.length > 50
+        ? message.slice(0, 50) + '...'
+        : message;
+    }
   }
 
-  openMessage(): void {
-    this.member.history[this.member.history.length - 1].isRead = true;
+  public openMessage(): void {
+    this.member.history.forEach(message => message.isRead = true);
     this.localStorageService.setToLS();
+  }
 
-    console.log(this.searchInput);
+  public unreadCount(messages: MessageInterface[]): number {
+    return messages.filter(message => !message.isRead).length;
   }
 }

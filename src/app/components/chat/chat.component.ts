@@ -1,7 +1,7 @@
-import {AfterViewChecked, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Member} from '../../public/interfaces/member';
-import {Message} from "../../public/interfaces/message";
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MemberInterface} from '../../public/interfaces/member.interface';
+import {MessageInterface} from '../../public/interfaces/message.interface';
 import {MembersService} from '../../public/services/members.service';
 import {JokesApiService} from '../../public/services/jokes-api.service';
 import {LocalStorageService} from '../../public/services/local-storage.service';
@@ -12,30 +12,32 @@ import {delay} from 'rxjs/operators';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, AfterViewChecked {
-  @ViewChild('scrollContainer') private scrollContainer: ElementRef;
+export class ChatComponent implements OnInit {
 
-  public member: Member;
+  public member: MemberInterface;
   public newMessageText = '';
+  private isReadMediaScreen = true;
+  @ViewChild('chatContainer') private chatContainer: ElementRef;
 
   constructor(
     private rote: ActivatedRoute,
     private membersService: MembersService,
     private httpService: JokesApiService,
     private localStorageService: LocalStorageService,
+    private router: Router,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.getMember();
-  }
-
-  ngAfterViewChecked(): void {
-    this.scrollToBottom();
+    this.cd.detectChanges();
   }
 
   private getMember(): void {
     this.rote.params.subscribe(params => {
       this.member = this.membersService.getMemberById(+params.id);
+
+      this.cd.detectChanges();
     });
   }
 
@@ -44,7 +46,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       return;
     }
 
-    const newMyMessage: Message = {
+    const newMyMessage: MessageInterface = {
       text: this.newMessageText,
       isMessageFromMe: true,
       isRead: true,
@@ -59,18 +61,18 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
     const currentMemberId: number = this.member.id;
     this.getMessage(currentMemberId);
-    this.scrollToBottom();
+    this.cd.detectChanges();
   }
 
   private getMessage(id: number): void {
   this.httpService.getMessage()
-    .pipe(delay(3000))
+    .pipe(delay(10000))
     .subscribe(jokesApiRes => {
 
-      const newInterlocutorMessage: Message = {
+      const newInterlocutorMessage: MessageInterface = {
         text: jokesApiRes.value,
         isMessageFromMe: false,
-        isRead: this.member.id === id,
+        isRead: !this.isReadMediaScreen ? false : this.member.id === id,
         messageTime: {
           date: new Date(),
         }};
@@ -79,11 +81,17 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       currentMember.history.push(newInterlocutorMessage);
 
       this.localStorageService.setToLS();
+      this.cd.detectChanges();
     });
   }
 
-  private scrollToBottom(): void {
-    this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
+  public backToSidebarMedia(): void {
+    this.chatContainer.nativeElement.classList.toggle('not-visible');
+    this.router.navigate(
+      ['/chat'])
+      .then();
+
+    this.isReadMediaScreen = false;
   }
 }
 

@@ -1,5 +1,6 @@
-<div class="chat">
+<div #chatContainer class="chat">
   <div class="chat-header">
+    <i  class="back_media-screen fas fa-angle-left" (click)="backToSidebarMedia()"></i>
     <div class="avatar">
       <img *ngIf="member.imageUrl else noAvatar"
            [src]="member.imageUrl" alt="img">
@@ -11,7 +12,8 @@
     <div class="name">{{member.name}}</div>
   </div>
 
-  <div #scrollContainer class="chat-massages">
+  <div #scrollContainer class="chat-massages"
+       [scrollTop]="scrollContainer.scrollHeight">
     <div class="messages"
          *ngFor="let message of member.history"
          [ngClass]="{'message-fom-me': message.isMessageFromMe}">

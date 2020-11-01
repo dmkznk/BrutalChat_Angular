@@ -1,5 +1,5 @@
 export interface Environment {
-  production: boolean,
-  localStorageKey: string,
-  apiUrl: string,
+  production: boolean;
+  localStorageKey: string;
+  apiUrl: string;
 }

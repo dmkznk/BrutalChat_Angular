@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {Member} from '../interfaces/member';
+import {MemberInterface} from '../interfaces/member.interface';
 
 @Pipe({
-  name: 'search'
+  name: 'SearchByName'
 })
-export class SearchPipe implements PipeTransform {
+export class SearchByNamePipe implements PipeTransform {
 
-  transform(members: Array<Member>, searchInputValue: string = ''): Array<Member> {
+  transform(members: Array<MemberInterface>, searchInputValue: string = ''): Array<MemberInterface> {
     if (!searchInputValue.trim()) {
       return members;
     }

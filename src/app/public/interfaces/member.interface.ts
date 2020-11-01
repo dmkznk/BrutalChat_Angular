@@ -1,9 +1,9 @@
-import {Message} from './message';
+import {MessageInterface} from './message.interface';
 
-export interface Member {
+export interface MemberInterface {
   id: number;
   name: string;
   isOnline: boolean;
   imageUrl: string;
-  history: Array<Message>;
+  history: Array<MessageInterface>;
 }

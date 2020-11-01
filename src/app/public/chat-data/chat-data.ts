@@ -1,6 +1,6 @@
-import {Member} from '../interfaces/member';
+import {MemberInterface} from '../interfaces/member.interface';
 
-export const chatData: Array<Member> = [
+export const chatData: Array<MemberInterface> = [
   {
     id: 1,
     name: 'Jason Statham',
@@ -243,6 +243,7 @@ export const chatData: Array<Member> = [
     imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTQwMTk3NDU2OV5BMl5BanBnXkFtZTcwNTA3MTI0Mw@@._V1_.jpg',
     history: [
       {
+        // tslint:disable-next-line:max-line-length
         text: 'There\'s a natural law of karma that vindictive people, who go out of their way to hurt others, will end up broke and alone.',
         isMessageFromMe: false,
         isRead: true,

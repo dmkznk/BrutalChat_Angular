@@ -8,3 +8,13 @@
 body {
   font-family: "Roboto", sans-serif;
 }
+
+@mixin respond-to($media) {
+  @if $media == handhelds {
+    @media only screen and (max-width: 479px) { @content;}
+  }
+  @else if $media == wide-handhelds {
+    @media only screen and (max-width: 769px) { @content; }
+  }
+}
+

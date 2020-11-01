@@ -10,15 +10,15 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import {SearchPipe} from './public/pipes/search.pipe';
-import { SortPipe } from './public/pipes/sort.pipe';
+import {SearchByNamePipe} from './public/pipes/search-by-name.pipe';
+import { SortByTimePipe } from './public/pipes/sort-by-time.pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
         SidebarComponent,
         ChatComponent,
-        ChatMemberComponent, SearchPipe, SortPipe
+        ChatMemberComponent, SearchByNamePipe, SortByTimePipe
     ],
   imports: [
     BrowserModule,

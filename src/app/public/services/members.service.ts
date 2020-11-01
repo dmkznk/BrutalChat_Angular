@@ -1,18 +1,18 @@
-import { Injectable } from '@angular/core';
-import {Member} from '../interfaces/member';
+import {Injectable} from '@angular/core';
+import {MemberInterface} from '../interfaces/member.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MembersService {
+export class MembersService{
 
-  public members;
+  public members: MemberInterface[];
 
-  public getMembers(): Member[] {
+  public getMembers(): MemberInterface[] {
     return this.members;
   }
 
-  public getMemberById(id: number): Member {
+  public getMemberById(id: number): MemberInterface {
     return this.members.find(member => member.id === id);
   }
 }

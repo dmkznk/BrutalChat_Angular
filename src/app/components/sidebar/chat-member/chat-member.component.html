@@ -1,4 +1,5 @@
 <div class="chat-member" (click)="openMessage()">
+
   <div class="member-info">
     <div class="avatar">
       <img *ngIf="member.imageUrl else noAvatar"
@@ -21,9 +22,11 @@
         <span class="date">
           {{member.history[member.history.length-1].messageTime.date | date}}
         </span>
-        <span class="notification"
-              *ngIf="!member.history[member.history.length-1].isRead">
+        <span class="notification" *ngIf="unreadCount(member.history)">
           <i class="fas fa-comment-dots"></i>
+          <span>
+            {{unreadCount(member.history)}}
+          </span>
         </span>
       </div>
     </div>

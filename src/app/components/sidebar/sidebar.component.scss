@@ -1,3 +1,5 @@
+@import 'src/app/scss/global.scss';
+
 .sidebar {
   height: 100vh;
   width: 35vw;
@@ -5,15 +7,32 @@
   flex-direction: column;
   border-right:  1px solid #e8e8e8;
 
+  @include respond-to(wide-handhelds) {
+    width: 45vw;
+    font-size: .8rem;
+  }
+
+  @include respond-to(handhelds) {
+    width: 100vw;
+  }
+
+
   &-header {
     background-color: #f5f5f5;
     padding: 20px;
+
+    @include respond-to(handhelds) {
+     display: flex;
+    }
 
     .avatar {
       height: 60px;
       width: 60px;
       margin-bottom: 30px;
       position: relative;
+      @include respond-to(handhelds) {
+        margin: 0 20px 0 0;
+      }
 
       img {
         height: 100%;
@@ -40,6 +59,11 @@
       border: 1px solid #e8e8e8;
       background-color: #fafafa;
 
+      @include respond-to(handhelds) {
+        width: 70%;
+        margin: auto ;
+      }
+
       i {
         order: -1;
         transition: opacity .25s ease;
@@ -52,6 +76,10 @@
         background: transparent;
         font-size: 1rem;
 
+        @include respond-to(handhelds) {
+          width: 70%;
+        }
+
         &:focus {
           outline: none;
         }
@@ -61,6 +89,9 @@
   .sidebar-title {
     padding: 30px 20px;
     color: deepskyblue;
+    @include respond-to(handhelds) {
+      padding: 10px 20px;
+    }
 
     h2 {
       font-weight: 300;

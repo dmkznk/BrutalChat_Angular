@@ -1,4 +1,4 @@
-export interface Message {
+export interface MessageInterface {
   text: string;
   isMessageFromMe: boolean;
   isRead: boolean;

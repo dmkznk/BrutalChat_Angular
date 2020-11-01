@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MembersService} from '../../public/services/members.service';
-import {Member} from '../../public/interfaces/member';
+import {MemberInterface} from '../../public/interfaces/member.interface';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,9 +9,8 @@ import {Member} from '../../public/interfaces/member';
 })
 export class SidebarComponent implements OnInit {
 
-  public members: Member[];
-  public searchInput: '';
-
+  public members: MemberInterface[];
+  public searchInputValue: '';
 
   constructor(private membersService: MembersService) { }
 
